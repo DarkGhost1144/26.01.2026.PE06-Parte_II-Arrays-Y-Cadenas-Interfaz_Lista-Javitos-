@@ -1,0 +1,92 @@
+/**
+ *
+ * @author alumno
+ */
+public class Alojamineto {
+
+    private String nombre;
+    private int capacidad;
+    private double tarifa;
+    private boolean chimenea;
+    private boolean jacuzzi;
+    private boolean alquilado;
+    private int numAlquilado;
+
+    public Alojamineto(String nombre, int capacidad, double tarifa, boolean chimenea, boolean jacuzzi, boolean alquilado, int numAlquilado) {
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.tarifa = tarifa;
+        this.chimenea = chimenea;
+        this.jacuzzi = jacuzzi;
+        this.alquilado = alquilado;
+        this.numAlquilado = numAlquilado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public double getTarifa() {
+        return tarifa;
+    }
+
+    public void setTarifa(double tarifa) {
+        this.tarifa = tarifa;
+    }
+
+    public boolean isChimenea() {
+        return chimenea;
+    }
+
+    public void setChimenea(boolean chimenea) {
+        this.chimenea = chimenea;
+    }
+
+    public boolean isJacuzzi() {
+        return jacuzzi;
+    }
+
+    public void setJacuzzi(boolean jacuzzi) {
+        this.jacuzzi = jacuzzi;
+    }
+
+    public boolean isAlquilado() {
+        return alquilado;
+    }
+
+    public void setAlquilado(boolean alquilado) {
+        this.alquilado = alquilado;
+    }
+
+    public int getNumAlquilado() {
+        return numAlquilado;
+    }
+
+    public void setNumAlquilado(int numAlquilado) {
+        this.numAlquilado = numAlquilado;
+    }
+
+    public int compareTo(Alojamineto otro) {
+        int comparacion = this.nombre.compareToIgnoreCase(otro.getNombre());
+
+        if (comparacion < 0) {
+            return -1; // Mi nombre es "menor" (va antes en el alfabeto)
+        } else if (comparacion > 0) {
+            return 1;  // Mi nombre es "mayor" (va después en el alfabeto)
+        } else {
+            return 0;  // Los nombres son iguales
+        }
+    }
+}

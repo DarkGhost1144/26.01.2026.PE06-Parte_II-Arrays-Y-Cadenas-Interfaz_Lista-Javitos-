@@ -1,0 +1,132 @@
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * 
+ */
+public class ListaNumerica implements Lista {
+
+    private int[] lista;
+    private final int TAM_MAX = 100;
+    private int tamanyo; 
+
+    public ListaNumerica() {
+        this.lista = new int[TAM_MAX];
+        this.tamanyo = 0;
+    }
+
+    @Override
+    public int getTamanyo() {
+        return this.tamanyo;
+    }
+
+    @Override
+    public void insertarAlFinal(int valor) {
+        if (tamanyo < TAM_MAX) {
+            lista[tamanyo] = valor;
+            tamanyo++;
+        } else {
+            System.out.println("Error: La lista está llena.");
+        }
+    }
+
+    @Override
+    public void insertarAlPrincipio(int valor) {
+        insertarEnLaPosicion(0, valor);
+    }
+
+    @Override
+    public void insertarEnLaPosicion(int posicion, int valor) {
+        if (tamanyo >= TAM_MAX) {
+            System.out.println("Error: Lista llena.");
+            return;
+        }
+        if (posicion < 0 || posicion > tamanyo) {
+            System.out.println("Error: Posición inválida.");
+            return;
+        }
+
+        // Desplazar elementos a la derecha
+        for (int i = tamanyo; i > posicion; i--) {
+            lista[i] = lista[i - 1];
+        }
+
+        lista[posicion] = valor;
+        tamanyo++;
+    }
+
+    @Override
+    public void eliminarLaPrimera() {
+        eliminar(0);
+    }
+
+    @Override
+    public void eliminarLaUltima() {
+        if (tamanyo > 0) {
+            tamanyo--;
+        }
+    }
+
+    @Override
+    public void eliminar(int posicion) {
+        if (posicion < 0 || posicion >= tamanyo) {
+            System.out.println("Error: Posición inválida.");
+            return;
+        }
+
+        // Desplazar elementos a la izquierda
+        for (int i = posicion; i < tamanyo - 1; i++) {
+            lista[i] = lista[i + 1];
+        }
+        
+        tamanyo--;
+    }
+
+    @Override
+    public int buscar(int n) {
+        for (int i = 0; i < tamanyo; i++) {
+            if (lista[i] == n) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public void unirDosListas(Lista lista2) {
+        if (lista2 instanceof ListaNumerica) {
+            ListaNumerica otraLista = (ListaNumerica) lista2;
+            
+            if (this.tamanyo + otraLista.getTamanyo() > TAM_MAX) {
+                System.out.println("Error: No caben todos los elementos.");
+                return;
+            }
+
+            for (int i = 0; i < otraLista.getTamanyo(); i++) {
+                this.insertarAlFinal(otraLista.lista[i]);
+            }
+        }
+    }
+
+    @Override
+    public String imprimirLista() {
+        String resultado = "[ "; // Iniciamos el string
+        
+        for (int i = 0; i < tamanyo; i++) {
+            resultado = resultado + lista[i]; // Concatenamos el número
+            
+            // Si no es el último elemento, añadimos una coma y espacio
+            if (i < tamanyo - 1) {
+                resultado = resultado + ", ";
+            }
+        }
+        
+        resultado = resultado + " ]"; // Cerramos el corchete
+        return resultado;
+    }
+
+    @Override
+    public String toString() {
+        return imprimirLista();
+    }
+}

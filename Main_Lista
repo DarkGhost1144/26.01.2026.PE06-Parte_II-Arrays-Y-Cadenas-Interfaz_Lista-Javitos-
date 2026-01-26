@@ -1,0 +1,16 @@
+/**
+ *
+ * @author alumno
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        ListaNumerica miLista = new ListaNumerica();
+
+        miLista.insertarAlFinal(10);
+        miLista.insertarAlFinal(20);
+        miLista.insertarAlPrincipio(5);
+
+        System.out.println(miLista.imprimirLista());
+    }
+}

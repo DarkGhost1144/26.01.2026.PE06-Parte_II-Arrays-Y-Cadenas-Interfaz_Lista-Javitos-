@@ -1,0 +1,12 @@
+public class Main {
+
+    public static void main(String[] args) {
+        ListaNumerica l1 = new ListaNumerica();
+
+        l1.insertarAlFinal(10);
+        l1.insertarAlFinal(20);
+        l1.insertarAlPrincipio(5);
+
+        System.out.println(l1.imprimirLista());
+    }
+}

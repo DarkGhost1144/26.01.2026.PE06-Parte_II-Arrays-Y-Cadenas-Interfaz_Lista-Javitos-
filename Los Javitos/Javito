@@ -1,0 +1,129 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Javito {
+
+    private Alojamiento[] alojamientos;
+    private Cliente[] clientes;
+    private int numAlojamientos;
+    private int numClientes;
+
+    public Javito() {
+        alojamientos = new Alojamiento[15];
+        clientes = new Cliente[100];
+        numAlojamientos = 0;
+        numClientes = 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Javitos [Clientes=" + numClientes
+                + ", Alojamientos=" + numAlojamientos + "]";
+    }
+
+    // Alta cliente
+    public boolean altaCliente(Cliente nuevo) {
+        if (numClientes >= clientes.length) {
+            return false;
+        }
+        clientes[numClientes] = nuevo;
+        numClientes++;
+        return true;
+    }
+
+    // Baja cliente por DNI
+    public boolean bajaCliente(String dni) {
+        for (int i = 0; i < numClientes; i++) {
+            if (clientes[i].getDni().equalsIgnoreCase(dni)) {
+
+                // Desplazamos a la izquierda
+                for (int j = i; j < numClientes - 1; j++) {
+                    clientes[j] = clientes[j + 1];
+                }
+
+                clientes[numClientes - 1] = null;
+                numClientes--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Listado clientes alfabético por nombre
+    public void listadoClientes() {
+        Cliente[] copia = Arrays.copyOf(clientes, numClientes);
+
+        Arrays.sort(copia, Comparator.comparing(Cliente::getNombre,
+                String.CASE_INSENSITIVE_ORDER));
+
+        for (Cliente c : copia) {
+            System.out.println(c);
+        }
+    }
+
+    // Top clientes por nº de veces alojado (descendente)
+    public void topClientes() {
+        Cliente[] copia = Arrays.copyOf(clientes, numClientes);
+
+        Arrays.sort(copia, Comparator
+                .comparingInt(Cliente::getNumVecesAlojado)
+                .reversed());
+
+        for (Cliente c : copia) {
+            System.out.println(c);
+        }
+    }
+
+    // Alta alojamiento
+    public boolean altaAlojamiento(Alojamiento nuevo) {
+        if (numAlojamientos >= alojamientos.length) {
+            return false;
+        }
+        alojamientos[numAlojamientos] = nuevo;
+        numAlojamientos++;
+        return true;
+    }
+
+    // Baja alojamiento por nombre
+    public boolean bajaAlojamiento(String nombre) {
+        for (int i = 0; i < numAlojamientos; i++) {
+            if (alojamientos[i].getNombre().equalsIgnoreCase(nombre)) {
+
+                // Desplazamiento
+                for (int j = i; j < numAlojamientos - 1; j++) {
+                    alojamientos[j] = alojamientos[j + 1];
+                }
+
+                alojamientos[numAlojamientos - 1] = null;
+                numAlojamientos--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Listado alojamientos alfabético por nombre
+    public void listadoAlojamientos() {
+        Alojamiento[] copia = Arrays.copyOf(alojamientos, numAlojamientos);
+
+        Arrays.sort(copia, Comparator.comparing(Alojamiento::getNombre,
+                String.CASE_INSENSITIVE_ORDER));
+
+        for (Alojamiento a : copia) {
+            System.out.println(a.getNombre());
+        }
+    }
+
+    // Top alojamientos por nº de veces alquilado (descendente)
+    public void topAlojamientos() {
+        Alojamiento[] copia = Arrays.copyOf(alojamientos, numAlojamientos);
+
+        Arrays.sort(copia, Comparator
+                .comparingInt(Alojamiento::getNumAlquilado)
+                .reversed());
+
+        for (Alojamiento a : copia) {
+            System.out.println(a.getNombre()
+                    + " | Veces alquilado: " + a.getNumAlquilado());
+        }
+    }

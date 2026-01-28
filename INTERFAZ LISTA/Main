@@ -1,5 +1,19 @@
+/**
+ * Clase principal que contiene el método main. Se utiliza para probar el
+ * funcionamiento de la clase ListaNumerica.
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see ListaNumerica
+ * @see Lista
+ */
 public class Main {
 
+    /**
+     * Método principal del programa.
+     *
+     * @param args argumentos de la línea de comandos
+     */
     public static void main(String[] args) {
         ListaNumerica l1 = new ListaNumerica();
 

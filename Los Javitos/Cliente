@@ -1,0 +1,101 @@
+public class Cliente {
+
+    private String nombre;
+    private String dni;
+    private String email;
+    private String lugarResidencia;
+    private int numVecesAlojado;
+
+    // Usamos los setters dentro para aprovechar las validaciones
+    public Cliente(String nombre, String dni, String email, String lugarResidencia, int numVecesAlojado) {
+        this.nombre = nombre;
+        this.lugarResidencia = lugarResidencia;
+        this.numVecesAlojado = numVecesAlojado;
+
+        // Asignación con validacion
+        this.setDni(dni);
+        this.setEmail(email);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        // Definimos el formato: 8 numeros y 1 letra
+        String formato = "\\d{8}[A-Z,a-z]";
+
+        if (dni != null && dni.matches(formato)) {
+            this.dni = dni.toUpperCase();
+        } else {
+            System.err.println("DNI no válido: " + dni);
+            this.dni = "00000000X";
+        }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        String formato = "[\\w.-]+@[\\w.-]+\\.[a-z]{2,}";
+
+        if (email != null && email.matches(formato)) {
+            this.email = email.toLowerCase(); // Se suele guardar en minusculas
+        } else {
+            System.err.println("Email no válido: " + email);
+            this.email = "sin-email@dominio.com";
+        }
+    }
+
+    public String getLugarResidencia() {
+        return lugarResidencia;
+    }
+
+    public void setLugarResidencia(String lugarResidencia) {
+        this.lugarResidencia = lugarResidencia;
+    }
+
+    public int getNumVecesAlojado() {
+        return numVecesAlojado;
+    }
+
+    public void setNumVecesAlojado(int numVecesAlojado) {
+        this.numVecesAlojado = numVecesAlojado;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente ["
+                + "Nombre: " + nombre
+                + " | DNI: " + dni
+                + " | Email: " + email
+                + " | Residencia: " + lugarResidencia
+                + " | Visitas: " + numVecesAlojado + "]";
+    }
+
+    public int compareTo(Cliente otroCliente) {
+        if (otroCliente == null) {
+            return 1;
+        }
+
+        // Utilizamos compareToIgnoreCase de la clase String para saber el orden alfabrtico
+        int resultadoComparacion = this.nombre.compareToIgnoreCase(otroCliente.getNombre());
+
+        if (resultadoComparacion < 0) {
+            return -1; // Este cliente es "menor" 
+        } else if (resultadoComparacion > 0) {
+            return 1;  // Este cliente es "mayor" 
+        } else {
+            return 0;  // Son iguales
+        }
+    }
+}

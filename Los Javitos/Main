@@ -1,1 +1,55 @@
+public class Main {
 
+    public static void main(String[] args) {
+
+        // Crear el gestor
+        Javito javitos = new Javito();
+
+        Cliente c1 = new Cliente("Jakub", "12345678A", "jakub@gmail.com", "Aracena", 5);
+        Cliente c2 = new Cliente("Jose", "87654321B", "jose@hotmail.com", "Sevilla", 2);
+        Cliente c3 = new Cliente("Agustin", "11223344C", "Agustin@yahoo.com", "Huelva", 8);
+
+        javitos.altaCliente(c1);
+        javitos.altaCliente(c2);
+        javitos.altaCliente(c3);
+
+        // CREAR ALOJAMIENTOS
+        Alojamiento a1 = new Alojamiento("Venito villamarin", 4, 120.0, true, false, false, 10);
+        Alojamiento a2 = new Alojamiento("Villa chopo", 8, 200.0, false, true, true, 15);
+        Alojamiento a3 = new Alojamiento("Villa camp nou", 2, 80.0, true, false, false, 5);
+
+        javitos.altaAlojamiento(a1);
+        javitos.altaAlojamiento(a2);
+        javitos.altaAlojamiento(a3);
+
+        // MOSTRAR ESTADO
+        System.out.println(javitos);
+
+        // LISTADOS
+        System.out.println("\n*** Listado de cliente ***");
+        javitos.listadoClientes();
+
+        System.out.println("\n*** Clientes ***");
+        javitos.topClientes();
+
+        System.out.println("\n*** Listado de Alojamiento  ***");
+        javitos.listadoAlojamientos();
+
+        System.out.println("\n*** Top Alojamiento ***");
+        javitos.topAlojamientos();
+
+        // BAJAS
+        System.out.println("\n--- BAJA CLIENTE (DNI 87654321B) ---");
+        javitos.bajaCliente("87654321B");
+
+        System.out.println("\n--- Baja Alojamiento (Villa chopo) ---");
+        javitos.bajaAlojamiento("Villa Mar");
+
+        // LISTADOS TRAS BAJAS
+        System.out.println("\n*** Cliente tras baja ***");
+        javitos.listadoClientes();
+
+        System.out.println("\n*** Alojamiento tras baja ***");
+        javitos.listadoAlojamientos();
+    }
+}
